@@ -1,12 +1,12 @@
 {
-  "name": "back",
+  "name": "bomberpartyback",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Gautier Colasse",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

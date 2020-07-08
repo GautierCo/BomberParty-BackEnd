@@ -19,28 +19,13 @@ const users = require('./src/utils/users');
 const botName = "Gut";
 
 io.on('connection', (socket) => {
-
-    /* PLAYER */
-
-    socket.on('newPlayer', (newPlayer) => {
-
-        io.emit('newPlayer', { socketId: socket.id, username: newPlayer.username, color: newPlayer.color, playerId: socket.id });
-        io.emit('refreshPlayer',  users.users );
-    });
-
-    socket.on('switch_player', () => {
-
-
-        io.emit('switch_player', users.getRandomPlayer(users.users));
-        console.log("switch player")
-    });
-
-    /* CHAT */
-
+ 
     socket.on('joinRoom', ({ username, color }) => {
 
         const playerId = users.users.length + 1;
-        const user = users.userJoin(socket.id, username, color, socket.id);
+        const user = users.userJoin(socket.id, username, color, playerId);
+
+        io.emit('newPlayer', { socketId: socket.id, username: user.username, color: user.color, playerId: user.playerId });
 
         socket.emit('message', formatMessage( botName, ' Welcome to chat ' + user.username));
 
@@ -67,7 +52,6 @@ io.on('connection', (socket) => {
 
             if (user) {
                 io.emit('message',  formatMessage( botName , ` ${user.username} as left the chat`));
-                io.emit('player_disconnect', socket.id);
             }
         }
     });

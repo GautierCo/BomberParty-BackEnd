@@ -56,13 +56,6 @@ const game = {
         });
     },
 
-    game: () => {
-
-    },
-};
-
-game.message();
-game.game();
 
 server.listen(8080, () => {
     console.log("WebSocket Started on port 8080");
